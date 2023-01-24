@@ -3,7 +3,7 @@ import {Outlet} from "react-router-dom";
 
 const MainLayout = ()=> {
     return (
-        <div>
+        <div style={{height: '100vh'}}>
             <Header/>
             <Outlet/>
             <Footer/>

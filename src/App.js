@@ -1,7 +1,7 @@
 import './App.css';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {MainLayout} from "./mainlayout";
-import {LoginPage, RegisterPage} from "./pages";
+import {LoginPage, RegisterPage, UsersPage} from "./pages";
 
 
 
@@ -14,6 +14,7 @@ const App = () => {
                 <Route index element={<Navigate to={'/login'}/>}/>
                 <Route path={'/login'} element = {<LoginPage/>}/>
                 <Route path={'/register'} element={<RegisterPage/>}/>
+                <Route path={'/users'} element={<UsersPage/>}/>
             </Route>
         </Routes>
   );
