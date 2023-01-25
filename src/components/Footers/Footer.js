@@ -1,8 +1,11 @@
-import './footer.css'
-const Footer = () => {
-    return (
-        <div className={'footer'}>
-        </div>
-    )
-}
-export {Footer}
+import Box from "@mui/material/Box";
+
+const Footer = () => (
+  <Box
+    sx={{
+      backgroundColor: "primary.main",
+      height: "50px",
+    }}
+  />
+);
+export default Footer;

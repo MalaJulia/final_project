@@ -1,14 +1,17 @@
-import {Footer, Header} from "../components";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Box from "@mui/material/Box";
 
-const MainLayout = ()=> {
-    return (
-        <div style={{height: '100vh'}}>
-            <Header/>
-            <Outlet/>
-            <Footer/>
-        </div>
-    )
-}
+import Footer from "../components/Footers/Footer";
+import Header from "../components/Headers/Header";
 
-export {MainLayout}
+const MainLayout = () => {
+  return (
+    <Box height="100vh" display="flex" flexDirection="column">
+      <Header />
+      <Outlet />
+      <Footer />
+    </Box>
+  );
+};
+
+export default MainLayout;
