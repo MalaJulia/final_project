@@ -1,7 +1,18 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
+import { useDemoData } from "@mui/x-data-grid-generator";
+import { usersService } from "../../services";
+import { useSearchParams } from "react-router-dom";
+import { getPageCount } from "@mui/x-data-grid/hooks/features/pagination/useGridPage";
 
-const UsersTable = ({ users = [] }) => {
+const UsersTable = () => {
+  const [users, setUsers] = useState([]);
+  const [usersCount, setUsersCount] = useState(0);
+  const [page, setPage] = useState(0);
+
+  const [query, setQuery] = useSearchParams({ page: "1" });
+
   const columns = [
     { field: "_id", width: 90 },
     { field: "course", width: 90 },
@@ -20,16 +31,34 @@ const UsersTable = ({ users = [] }) => {
     { field: "already_paid", width: 90 },
   ];
 
+  useEffect(() => {
+    usersService.getAll(query.get("page")).then(({ data }) => {
+      setUsers(data.data);
+      setPage(data.page -1);
+      setUsersCount(data.total_count);
+    });
+  }, [query]);
+  //
+  const newPage = () => {
+    setQuery((value) => ({ page: +value.get("page") + 1 }));
+  };
+
   return (
     <Box flex={1} overflow="auto">
       <DataGrid
+          onPageChange={newPage}
         rows={users}
         getRowId={(row) => row._id}
         columns={columns}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        rowCount={usersCount}
+        page={page}
         checkboxSelection
+        paginationMode="server"
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+
       />
     </Box>
   );

@@ -2,15 +2,10 @@ import { useEffect, useState } from "react";
 
 import UsersTable from "../../components/UsersTable/UsersTable";
 import { usersService } from "../../services";
+import {useSearchParams} from "react-router-dom";
 
 const UsersPage = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    usersService.getAll().then(({ data }) => {
-      setUsers(data.data);
-    });
-  }, []);
-  return <UsersTable users={users} />;
+  return <UsersTable />;
 };
 
 export default UsersPage;
