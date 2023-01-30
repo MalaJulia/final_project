@@ -34,19 +34,19 @@ const UsersTable = () => {
   useEffect(() => {
     usersService.getAll(query.get("page")).then(({ data }) => {
       setUsers(data.data);
-      setPage(data.page -1);
+      setPage(data.page - 1);
       setUsersCount(data.total_count);
     });
   }, [query]);
   //
-  const newPage = () => {
-    setQuery((value) => ({ page: +value.get("page") + 1 }));
+  const newPage = (event) => {
+    setQuery((value) => ({ page: event + 1 }));
   };
 
   return (
     <Box flex={1} overflow="auto">
       <DataGrid
-          onPageChange={newPage}
+        onPageChange={newPage}
         rows={users}
         getRowId={(row) => row._id}
         columns={columns}
@@ -58,7 +58,6 @@ const UsersTable = () => {
         paginationMode="server"
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
-
       />
     </Box>
   );
