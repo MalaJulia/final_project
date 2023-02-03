@@ -1,17 +1,16 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import { usersService } from "../../services";
+import {searchService, usersService} from "../../services";
 import { useSearchParams } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import Search from "./SearchBar";
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
   const [usersCount, setUsersCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [searchResult, setSearchResult] = useState([]);
 
-  const [query, setQuery] = useSearchParams({ page: "1" });
+  const [query, setQuery] = useSearchParams({ page: "1", name: "" });
 
   const columns = [
     { field: "_id", width: 90 },
@@ -32,7 +31,7 @@ const UsersTable = () => {
   ];
 
   useEffect(() => {
-    usersService.getAll(query.get("page")).then(({ data }) => {
+    searchService.searchName(query.get("page"), query.get("name")).then(({ data }) => {
       setUsers(data.data);
       setPage(data.page - 1);
       setUsersCount(data.total_count);
@@ -40,12 +39,14 @@ const UsersTable = () => {
   }, [query]);
   //
   const newPage = (event) => {
-    setQuery((value) => ({ page: event + 1 }));
+    setQuery(() => ({ page: event + 1, name:query.get('name')} ))
+    console.log(event)
+    console.log (query)
   };
 
   return (
     <>
-      <SearchBar users={users} setSearchResults={setSearchResult} />
+      <Search/>
       <Box flex={1} overflow="auto">
         <DataGrid
           onPageChange={newPage}
@@ -60,6 +61,7 @@ const UsersTable = () => {
           paginationMode="server"
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
+
         />
       </Box>
     </>
