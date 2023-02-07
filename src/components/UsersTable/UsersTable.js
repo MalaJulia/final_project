@@ -1,7 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import {searchService, usersService} from "../../services";
+import { searchService } from "../../services";
 import { useSearchParams } from "react-router-dom";
 import Search from "./SearchBar";
 
@@ -10,7 +10,15 @@ const UsersTable = () => {
   const [usersCount, setUsersCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const [query, setQuery] = useSearchParams({ page: "1", name: "" });
+  const [query, setQuery] = useSearchParams({
+    page: "1",
+    name: "",
+    surname: "",
+    age: "",
+    email: "",
+    phone: "",
+    course:""
+  });
 
   const columns = [
     { field: "_id", width: 90 },
@@ -31,17 +39,36 @@ const UsersTable = () => {
   ];
 
   useEffect(() => {
-    searchService.searchName(query.get("page"), query.get("name")).then(({ data }) => {
-      setUsers(data.data);
-      setPage(data.page - 1);
-      setUsersCount(data.total_count);
-    });
+    searchService
+      .Search(
+        query.get("page"),
+        query.get("name"),
+        query.get("surname"),
+        query.get("age"),
+        query.get("email"),
+        query.get("phone"),
+          query.get("course")
+      )
+      .then(({ data }) => {
+        setUsers(data.data);
+        setPage(data.page - 1);
+        setUsersCount(data.total_count);
+        console.log(data.data);
+      });
   }, [query]);
-  //
+
   const newPage = (event) => {
-    setQuery(() => ({ page: event + 1, name:query.get('name')} ))
-    console.log(event)
-    console.log (query)
+    setQuery(() => ({
+      page: event + 1,
+      name: query.get("name"),
+      surname: query.get("surname"),
+      age: query.get("age"),
+      email: query.get("email"),
+      phone: query.get("phone"),
+      course: query.get("course")
+    }));
+    console.log(event);
+    console.log(query);
   };
 
   return (
@@ -61,7 +88,6 @@ const UsersTable = () => {
           paginationMode="server"
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
-
         />
       </Box>
     </>
