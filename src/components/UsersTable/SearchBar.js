@@ -12,6 +12,9 @@ const Search = () => {
     email: "",
     phone: "",
     course: "",
+      course_format: "",
+      course_type: "",
+      status: "",
   });
 
   const Course = {
@@ -19,10 +22,28 @@ const Search = () => {
     qacx: "QACX",
     jcx: "JCX",
     jscx: "JSCX",
-    not_course: "",
     fe: "FE",
     pcx: "PCX",
+      all: ""
   };
+  const CourseFormat = {
+      static: "static",
+      online: "online"
+  }
+  const CourseType ={
+      pro: "pro",
+      minimal: "minimal",
+      premium: "premium",
+      incubator: "incubator",
+  }
+  const Status ={
+      inWork: "В работе",
+      nwe:"Новый",
+      notAgree:"Не согласен"
+  }
+
+
+
 
   // const cors = course.map((cors) => cors.course);
   // console.log(cors, "map");
@@ -31,26 +52,13 @@ const Search = () => {
 
   const handleSubmit = (e) => e.preventDefault();
 
-  const handleSearchChangeCourse = (e) => {
-    setQuery(() => ({
-      page: query.get("page"),
-      name: query.get("name"),
-      surname: query.get("surname"),
-      age: query.get("age"),
-      email: query.get("email"),
-      phone: query.get("phone"),
-      course: e.target.value,
-    }));
-    console.log(e.target.value);
-    if (!e.target.value) {
-      return;
-    }
-  };
 
   const handleSearchChange = (event) => {
-    const { value, id } = event.target;
+    console.log(event, "event");
+    const { value, id, name } = event.target;
     const queryParams = Object.fromEntries([...query]);
-    queryParams[id] = value;
+    const paramsName = id || name;
+    queryParams[paramsName] = value;
     setQuery(() => queryParams);
   };
 
@@ -101,15 +109,17 @@ const Search = () => {
         onSubmit={handleSubmit}
         defaultValue={query.get("phone")}
       />
-      <InputLabel id="demo-simple-select-label">Course</InputLabel>
+
+      <InputLabel>Course</InputLabel>
       <Select
         sx={{ width: "150px" }}
         variant="standard"
+        name="course"
         labelId="demo-simple-select-label"
-        id="demo-simple-select"
+        id="course"
         value={query.get("course")}
-        label="Age"
-        onChange={handleSearchChangeCourse}
+        label="Course"
+        onChange={handleSearchChange}
       >
         <MenuItem value={Course.fe}>FE</MenuItem>
         <MenuItem value={Course.pcx}>PCX</MenuItem>
@@ -117,8 +127,58 @@ const Search = () => {
         <MenuItem value={Course.jcx}>JCX</MenuItem>
         <MenuItem value={Course.jscx}>JSCX</MenuItem>
         <MenuItem value={Course.qacx}>QACX</MenuItem>
-        <MenuItem value={Course.not_course}>NOT COURSE</MenuItem>
+          <MenuItem value={Course.all}>All courses</MenuItem>
+
       </Select>
+
+        <InputLabel>Course format</InputLabel>
+        <Select
+            sx={{ width: "150px" }}
+            variant="standard"
+            name="course_format"
+            labelId="demo-simple-select-label"
+            id="course_format"
+            value={query.get("course_format")}
+            label="Course_format"
+            onChange={handleSearchChange}
+        >
+            <MenuItem value={CourseFormat.online}>Online</MenuItem>
+            <MenuItem value={CourseFormat.static}>Static</MenuItem>
+
+        </Select>
+
+        <InputLabel id="CourseType">Course type</InputLabel>
+        <Select
+            sx={{ width: "150px" }}
+            variant="standard"
+            name="course_type"
+            labelId="demo-simple-select-label"
+            id="course_type"
+            value={query.get("course_type")}
+            label="CourseType"
+            onChange={handleSearchChange}
+        >
+            <MenuItem value={CourseType.pro}>Pro</MenuItem>
+            <MenuItem value={CourseType.premium}>Premium</MenuItem>
+            <MenuItem value={CourseType.minimal}>Minimal</MenuItem>
+            <MenuItem value={CourseType.incubator}>Incubator</MenuItem>
+        </Select>
+
+        <InputLabel id="status">Status</InputLabel>
+        <Select
+            sx={{ width: "150px" }}
+            variant="standard"
+            name="status"
+            labelId="demo-simple-select-label"
+            id="status"
+            value={query.get("status")}
+            label="Status"
+            onChange={handleSearchChange}
+        >
+            <MenuItem value={Status.inWork}>В работе</MenuItem>
+            <MenuItem value={Status.nwe}>Новый</MenuItem>
+            <MenuItem value={Status.notAgree}>Нe coгласен</MenuItem>
+        </Select>
     </Box>
   );
 };

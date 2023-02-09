@@ -9,10 +9,14 @@ const searchService = {
     age = "",
     email = "",
     phone = "",
-    course = ""
+    course = "",
+    course_format ="",
+    course_type= "",
+    status=""
+
   ) =>
     axiosService.get(urls.users, {
-      params: { page, name, surname, age, email, phone,course },
+      params: { page, name, surname, age, email, phone,course, course_format, course_type, status },
     }),
 };
 
@@ -21,23 +25,12 @@ export { searchService };
 // already_paid
 //     :
 //     null
-// course_format
-//     :
-//     "static"
-// course_type
-//     :
-//     "pro"
 // created_at
 //     :
 //     "2021-08-04T18:18:23Z"
-
 // msg
 //     :
 //     null
-
-// status
-//     :
-//     "Новый"
 // sum
 //     :
 //     null

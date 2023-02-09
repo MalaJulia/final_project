@@ -17,7 +17,10 @@ const UsersTable = () => {
     age: "",
     email: "",
     phone: "",
-    course:""
+    course: "",
+    course_format: "",
+    course_type: "",
+    status: "",
   });
 
   const columns = [
@@ -47,7 +50,10 @@ const UsersTable = () => {
         query.get("age"),
         query.get("email"),
         query.get("phone"),
-          query.get("course")
+        query.get("course"),
+        query.get("course_format"),
+        query.get("course_type"),
+        query.get("status")
       )
       .then(({ data }) => {
         setUsers(data.data);
@@ -65,7 +71,10 @@ const UsersTable = () => {
       age: query.get("age"),
       email: query.get("email"),
       phone: query.get("phone"),
-      course: query.get("course")
+      course: query.get("course"),
+      course_format: query.get("course_format"),
+      course_type: query.get("course_type"),
+      status: query.get("status"),
     }));
     console.log(event);
     console.log(query);
@@ -73,7 +82,7 @@ const UsersTable = () => {
 
   return (
     <>
-      <Search/>
+      <Search />
       <Box flex={1} overflow="auto">
         <DataGrid
           onPageChange={newPage}
