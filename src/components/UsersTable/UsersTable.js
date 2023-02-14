@@ -25,7 +25,6 @@ const UsersTable = () => {
         setUsers(data.data);
         setPage(data.page - 1);
         setUsersCount(data.total_count);
-        console.log(data.data);
       })
       .catch((error) => {
         console.log(error, "Error in request");
@@ -70,6 +69,7 @@ const UsersTable = () => {
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
           onSortModelChange={sortPage}
+          sortingOrder ={['asc', 'desc']}
         />
       </Box>
     </>
