@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
+
 import isEmail from "validator/lib/isEmail";
 
 import "./LoginPage.css";
 import { authService } from "../../services";
-import { useState } from "react";
-import Typography from "@mui/material/Typography";
+
 
 const LoginPage = () => {
   const { handleSubmit, register } = useForm();
@@ -34,9 +38,7 @@ const LoginPage = () => {
   const handleChange = (event) => {
     const inputText = event.target.value;
 
-    inputText.length > 0
-      ? setIsError(!isEmail(inputText))
-      : setIsError(false);
+    inputText.length > 0 ? setIsError(!isEmail(inputText)) : setIsError(false);
 
     setEmail(inputText);
   };

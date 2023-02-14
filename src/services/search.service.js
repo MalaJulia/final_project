@@ -2,7 +2,7 @@ import axiosService from "./axios.service";
 import { urls } from "../configs";
 
 const searchService = {
-  Search: (
+  Search: ({
     page = 1,
     name = "",
     surname = "",
@@ -10,31 +10,28 @@ const searchService = {
     email = "",
     phone = "",
     course = "",
-    course_format ="",
-    course_type= "",
-    status=""
-
-  ) =>
+    course_format = "",
+    course_type = "",
+    status = "",
+    created_at = "",
+    order = "email",
+  }) =>
     axiosService.get(urls.users, {
-      params: { page, name, surname, age, email, phone,course, course_format, course_type, status },
+      params: {
+        page,
+        name,
+        surname,
+        age,
+        email,
+        phone,
+        course,
+        course_format,
+        course_type,
+        status,
+        created_at,
+        order,
+      },
     }),
 };
 
 export { searchService };
-
-// already_paid
-//     :
-//     null
-// created_at
-//     :
-//     "2021-08-04T18:18:23Z"
-// msg
-//     :
-//     null
-// sum
-//     :
-//     null
-// utm
-//     :
-//     "event"
-// _id
