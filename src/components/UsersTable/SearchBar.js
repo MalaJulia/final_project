@@ -89,7 +89,6 @@ const Search = () => {
           <MenuItem value={course.qacx}>QACX</MenuItem>
           <MenuItem value={course.all}>All courses</MenuItem>
         </Select>
-        {/*<FormHelperText>Without label</FormHelperText>*/}
       </FormControl>
       <FormControl sx={{ minWidth: 100 }}>
         <InputLabel>Course format</InputLabel>

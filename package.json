@@ -9,6 +9,7 @@
     "@mui/material": "^5.11.6",
     "@mui/x-data-grid": "^5.17.20",
     "@mui/x-data-grid-generator": "^5.17.20",
+    "@mui/x-data-grid-pro": "^5.17.23",
     "@mui/x-date-pickers": "^5.0.18",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -1,5 +1,5 @@
 const columns = [
-  { field: "_id", width: 90 },
+  { field: "_id", width: 90,  },
   { field: "course", width: 90 },
   { field: "name", width: 90 },
   { field: "surname", width: 100 },
@@ -9,12 +9,11 @@ const columns = [
   { field: "course_format", width: 90 },
   { field: "course_type", width: 90 },
   { field: "created_at", width: 110 },
-  { field: "utm", width: 80 },
-  { field: "msg", width: 50 },
   { field: "status", width: 70 },
   { field: "sum", width: 90 },
   { field: "already_paid", width: 75 },
 ];
+
 
 const course = {
   fs: "FS",

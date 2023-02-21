@@ -16,7 +16,7 @@ const searchService = {
     created_at = "",
     order = "email",
   }) =>
-    axiosService.get(urls.users, {
+    axiosService.get(urls.users.paid, {
       params: {
         page,
         name,
