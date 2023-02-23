@@ -16,19 +16,25 @@ const Header = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Typography variant="h5" component="h2" color="white">
-        BigBirdSPS
-      </Typography>
+
+      <Button variant={'text'}
+              onClick={()=>navigate("/users")}>
+        <Typography variant="h5" component="h2" color="white">
+          BigBirdSPS
+        </Typography>
+      </Button>
+
+
       <Box>
-        <Button
-          color="secondary"
-          variant="contained"
-          size="small"
-          sx={{ marginX: 1 }}
-          onClick={() => navigate("/login")}
-        >
-          Login
-        </Button>
+        {/*<Button*/}
+        {/*  color="secondary"*/}
+        {/*  variant="contained"*/}
+        {/*  size="small"*/}
+        {/*  sx={{ marginX: 1 }}*/}
+        {/*  onClick={() => navigate("/login")}*/}
+        {/*>*/}
+        {/*  Login*/}
+        {/*</Button>*/}
         <Button
           color="secondary"
           variant="contained"
@@ -36,7 +42,7 @@ const Header = () => {
           sx={{ marginX: 1 }}
           onClick={() => navigate("/register")}
         >
-          Register
+          LogOut
         </Button>
       </Box>
     </Box>

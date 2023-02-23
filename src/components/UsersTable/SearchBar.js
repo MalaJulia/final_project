@@ -14,11 +14,17 @@ const Search = () => {
 
   const handleSearchChange = (event) => {
     const { value, id, name } = event.target;
-    const queryParams = Object.fromEntries([...query]);
+    console.log(value, "value");
     const paramsName = id || name || value;
-    queryParams[paramsName] = value;
-    setQuery(() => queryParams);
+    if (!value) {
+      query.delete(paramsName);
+    }
+    const queryParams = Object.fromEntries([...query]);
+    if (value) {
+      queryParams[paramsName] = value;
+    }
 
+    setQuery(() => queryParams);
   };
 
   return (

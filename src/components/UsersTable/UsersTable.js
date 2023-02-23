@@ -7,7 +7,6 @@ import queryParams from "../../constants/quaryParams";
 import { columns } from "../../constants";
 import Row from "./Row";
 
-
 import {
   Paper,
   Table,
@@ -20,7 +19,6 @@ import {
   TableSortLabel,
 } from "@mui/material";
 
-
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
   const [usersCount, setUsersCount] = useState(0);
@@ -32,9 +30,11 @@ const UsersTable = () => {
   const [orderBy, setOrderBy] = useState("name");
 
   const [query, setQuery] = useSearchParams(queryParams);
+  const params = new URLSearchParams(searchService.Search.search);
 
   useEffect(() => {
     const queryData = Object.fromEntries([...query]);
+    console.log(queryData, "data");
 
     searchService
       .Search(queryData)
@@ -54,6 +54,7 @@ const UsersTable = () => {
     setOrderBy(property);
 
     const queryParams = Object.fromEntries([...query]);
+
     const paramsName = orderBy;
     if (isAsc === true) {
       queryParams["order"] = paramsName;
@@ -61,6 +62,7 @@ const UsersTable = () => {
     if (isAsc === false) {
       queryParams["order"] = "-" + paramsName;
     }
+
     setQuery(() => queryParams);
   };
 
@@ -75,7 +77,7 @@ const UsersTable = () => {
   return (
     <>
       <Search />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ marginTop: " auto" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow key={users._id}>
@@ -120,55 +122,4 @@ const UsersTable = () => {
   );
 };
 
-// {
-//   /*<Box flex={1} overflow="auto">*/
-// }
-// {
-//   /*  <DataGrid*/
-// }
-// {
-//   /*    onPageChange={newPage}*/
-// }
-// {
-//   /*    rows={users}*/
-// }
-// {
-//   /*    getRowId={(row) => row._id}*/
-// }
-// {
-//   /*    columns={columns}*/
-// }
-// {
-//   /*    pageSize={10}*/
-// }
-// {
-//   /*    rowsPerPageOptions={[10]}*/
-// }
-// {
-//   /*    rowCount={usersCount}*/
-// }
-// {
-//   /*    page={page}*/
-// }
-// {
-//   /*    paginationMode="server"*/
-// }
-// {
-//   /*    disableSelectionOnClick*/
-// }
-// {
-//   /*    experimentalFeatures={{ newEditingApi: true }}*/
-// }
-// {
-//   /*    onSortModelChange={sortPage}*/
-// }
-// {
-//   /*    sortingOrder={["asc", "desc"]}*/
-// }
-// {
-//   /*  />*/
-// }
-// {
-//   /*</Box>*/
-// }
 export default UsersTable;

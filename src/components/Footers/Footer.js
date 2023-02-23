@@ -5,6 +5,7 @@ const Footer = () => (
     sx={{
       backgroundColor: "primary.main",
       height: "50px",
+        marginTop:" auto"
     }}
   />
 );

@@ -9,12 +9,18 @@ import UsersPage from "./pages/UsersPage/UsersPage";
 const App = () => {
   return (
     <Routes>
-      <Route path={"/"} element={<MainLayout />}>
+      <Route path={"/"}>
         <Route index element={<Navigate to={"/login"} />} />
         <Route path={"/login"} element={<LoginPage />} />
-        <Route path={"/register"} element={<RegisterPage />} />
-        <Route path={"/users"} element={<UsersPage />} />
+
+        {/*<Route path={"/users"} element={<UsersPage />} />*/}
       </Route>
+
+            <Route path={"/"} element={<MainLayout />}>
+                <Route path={"/users"} element={<UsersPage />} />
+                <Route path={"/register"} element={<RegisterPage />} />
+            </Route>
+
     </Routes>
   );
 };
