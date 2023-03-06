@@ -1,15 +1,13 @@
-import UserAdminProfile from "./userAdminProfile";
-
 const UserAdmin =(props) =>{
     const {userAdmin} = props
 
     return(
         <div>
-            <div>{userAdmin.email}</div>
+            <div>emaill:{userAdmin.email}</div>
             <div>
-                {userAdmin.profile.map((profile) => (<UserAdminProfile key={profile} profile = {profile}/>))}
-
+                name :{userAdmin.profile.name}
             </div>
+            <div>surname: {userAdmin.profile.surname}</div>
         </div>
     )
 }

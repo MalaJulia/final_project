@@ -29,13 +29,14 @@ const UsersTable = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
 
+  const [comments, setComments] = useState([])
+
+
   const [query, setQuery] = useSearchParams(queryParams);
-  const params = new URLSearchParams(searchService.Search.search);
 
   useEffect(() => {
     const queryData = Object.fromEntries([...query]);
     console.log(queryData, "data");
-
     searchService
       .Search(queryData)
       .then(({ data }) => {
@@ -63,7 +64,7 @@ const UsersTable = () => {
       queryParams["order"] = "-" + paramsName;
     }
 
-    setQuery(() => queryParams);
+    setQuery(() => queryParams,  queryParams.page = 1);
   };
 
   const newPage = (event, pageNew) => {
@@ -102,7 +103,7 @@ const UsersTable = () => {
           </TableHead>
           <TableBody>
             {users.map((row) => (
-              <Row row={row} users={users} key={row._id} />
+              <Row row={row} users={users} key={row._id} comments={row.comments} />
             ))}
           </TableBody>
         </Table>

@@ -7,7 +7,7 @@ const urls = {
     adminRefreshToken:"admin/users/{id}/re_token"
   },
   users: {
-    paid:"/paid",
+    paid:'/paid/',
     myUser:"/users/me"
 
   },

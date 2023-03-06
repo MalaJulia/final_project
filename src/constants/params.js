@@ -22,12 +22,13 @@ const course = {
   jscx: "JSCX",
   fe: "FE",
   pcx: "PCX",
-  all: "",
+  all: ""
 };
 
 const courseFormat = {
   static: "static",
   online: "online",
+  all:""
 };
 
 const courseType = {
@@ -35,12 +36,14 @@ const courseType = {
   minimal: "minimal",
   premium: "premium",
   incubator: "incubator",
+  all: ""
 };
 
 const status = {
   inWork: "В работе",
   nwe: "Новый",
   notAgree: "Не согласен",
+  all: ""
 };
 
 export { columns, course, courseFormat, courseType, status };

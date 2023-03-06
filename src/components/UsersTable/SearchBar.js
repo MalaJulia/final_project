@@ -1,8 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 
+import { debounce } from "debounce"
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 import queryParams from "../../constants/quaryParams";
 import { course, courseFormat, courseType, status } from "../../constants";
@@ -12,20 +14,25 @@ const Search = () => {
 
   const handleSubmit = (e) => e.preventDefault();
 
-  const handleSearchChange = (event) => {
-    const { value, id, name } = event.target;
-    console.log(value, "value");
-    const paramsName = id || name || value;
-    if (!value) {
-      query.delete(paramsName);
-    }
-    const queryParams = Object.fromEntries([...query]);
-    if (value) {
-      queryParams[paramsName] = value;
-    }
+  const handleSearchChange =
+      (event) => {
+      const { value, id, name } = event.target;
+      console.log(value, "value");
+      const paramsName = id || name || value;
+      if (!value) {
+          query.delete(paramsName);
+      }
+      const queryParams = Object.fromEntries([...query]);
 
-    setQuery(() => queryParams);
-  };
+      if (value) {
+          queryParams[paramsName] = value;
+          queryParams.page = 1;
+      }
+
+      setQuery(() => queryParams)
+           }
+
+
 
   return (
     <Box>
@@ -34,7 +41,7 @@ const Search = () => {
         label="Name"
         type="search"
         variant="standard"
-        onChange={handleSearchChange}
+        onChange={debounce(handleSearchChange, 800)}
         onSubmit={handleSubmit}
         defaultValue={query.get("name")}
       />
@@ -43,7 +50,7 @@ const Search = () => {
         label="Surname"
         type="search"
         variant="standard"
-        onChange={handleSearchChange}
+        onChange={debounce(handleSearchChange, 800)}
         onSubmit={handleSubmit}
         defaultValue={query.get("surname")}
       />
@@ -52,7 +59,7 @@ const Search = () => {
         label="age"
         type="number"
         variant="standard"
-        onChange={handleSearchChange}
+        onChange={debounce(handleSearchChange, 800)}
         onSubmit={handleSubmit}
         defaultValue={query.get("age")}
       />
@@ -61,7 +68,7 @@ const Search = () => {
         label="Email"
         type="search"
         variant="standard"
-        onChange={handleSearchChange}
+        onChange={debounce(handleSearchChange, 800)}
         onSubmit={handleSubmit}
         defaultValue={query.get("email")}
       />
@@ -70,7 +77,7 @@ const Search = () => {
         label="Phone"
         type="number"
         variant="standard"
-        onChange={handleSearchChange}
+        onChange={debounce(handleSearchChange, 800)}
         onSubmit={handleSubmit}
         defaultValue={query.get("phone")}
       />
@@ -83,7 +90,7 @@ const Search = () => {
           name="course"
           labelId="demo-simple-select-label"
           id="course"
-          value={query.get("course")}
+          value={course.all}
           label="Course"
           onChange={handleSearchChange}
         >
@@ -104,7 +111,7 @@ const Search = () => {
           name="course_format"
           labelId="demo-simple-select-label"
           id="course_format"
-          value={query.get("course_format")}
+          value={courseFormat.all}
           label="Course_format"
           onChange={handleSearchChange}
         >
@@ -121,7 +128,7 @@ const Search = () => {
           name="course_type"
           labelId="demo-simple-select-label"
           id="course_type"
-          value={query.get("course_type")}
+          value={courseType.all}
           label="CourseType"
           onChange={handleSearchChange}
         >
@@ -140,7 +147,7 @@ const Search = () => {
           name="status"
           labelId="demo-simple-select-label"
           id="status"
-          value={query.get("status")}
+          value={status.all}
           label="Status"
           onChange={handleSearchChange}
         >
@@ -162,6 +169,7 @@ const Search = () => {
           shrink: true,
         }}
       />
+
     </Box>
   );
 };
